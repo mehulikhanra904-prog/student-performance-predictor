@@ -13,5 +13,5 @@ Fork the repository to your own GitHub account.
 ### 2. Clone your fork
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/student-performance-predictor.git
+git clone https://github.com/mehulikhanra904-prog/student-performance-predictor.git
 cd student-performance-predictor
