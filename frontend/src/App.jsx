@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-function App() {
+function App() {\n  const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
   // =====================================================
   // INITIAL FORM
   // =====================================================
@@ -56,7 +56,7 @@ function App() {
   // =====================================================
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/model-info")
+    fetch(`${API_URL}/model-info`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Could not load model information");
@@ -154,7 +154,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/predict",
+        `${API_URL}/predict`,
         {
           method: "POST",
 
