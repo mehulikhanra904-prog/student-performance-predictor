@@ -1,15 +1,19 @@
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import joblib
 
+BASE_DIR = Path(__file__).resolve().parent
+
 app = FastAPI(title="Student Performance Predictor", description="ML-based student performance prediction API", version="1.1.0")
 
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=False, allow_methods=["*"], allow_headers=["*"])
 
 try:
-    model = joblib.load("model.pkl")
-    model_info = joblib.load("model_info.pkl")
+    model = joblib.load(BASE_DIR / "model.pkl")
+    model_info = joblib.load(BASE_DIR / "model_info.pkl")
 except Exception as exc:
     model = None
     model_info = {}
