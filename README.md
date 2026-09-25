@@ -63,3 +63,18 @@ Then open the local Vite URL shown in the terminal.
 ## Purpose
 
 This project is built as a beginner-friendly full-stack ML project to demonstrate how a trained machine learning model can be integrated into a web application.
+
+
+## Contributors
+
+Thanks to everyone who contributes to Student Performance Predictor! ❤️
+
+Contributors will be listed here as the project grows.
+
+<a href="https://github.com/mehulikhanra904-prog/student-performance-predictor/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mehulikhanra904-prog/student-performance-predictor" />
+</a>
+
+Want to contribute?
+
+Check out our open issues and look for issues labeled `good first issue` or `help wanted`.
