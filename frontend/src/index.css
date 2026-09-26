@@ -13,3 +13,12 @@ html {
 body {
   min-width: 320px;
 }
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
