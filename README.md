@@ -10,7 +10,7 @@
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Python](https://img.shields.io/badge/Python-ML%20Backend-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 
-**[Open the live demo](https://student-performance-predictor-virid.vercel.app/)** · [Explore the code](https://github.com/mehulikhanra904-prog/student-performance-predictor)
+**Live Vercel deployment:** [Open the app](https://student-performance-predictor-virid.vercel.app/) · [Explore the code](https://github.com/mehulikhanra904-prog/student-performance-predictor)
 
 </div>
 
