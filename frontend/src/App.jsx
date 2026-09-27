@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-const API_URL = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+const API_URL = (import.meta.env.VITE_PREDICTOR_API_URL || "").replace(/\/$/, "");
 const initial = { study_hours: "", attendance: "", previous_score: "", assignments_completed: "", sleep_hours: "", participation: "" };
 const fields = [
   ["study_hours", "Study hours per day", "0", "24", "e.g. 6"],

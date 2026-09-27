@@ -133,7 +133,7 @@ npm install
 Create `frontend/.env.local`:
 
 ```env
-VITE_API_URL=http://127.0.0.1:8000
+VITE_PREDICTOR_API_URL=http://127.0.0.1:8000
 ```
 
 Then run:
@@ -181,7 +181,7 @@ The live frontend is [student-performance-predictor-virid.vercel.app](https://st
 - **Framework:** Vite
 - **Build command:** `npm run build`
 - **Output directory:** `dist`
-- **Environment variable:** `VITE_API_URL` set to the public base URL of the deployed FastAPI service
+- **Environment variable:** `VITE_PREDICTOR_API_URL` set to the public base URL of the deployed FastAPI service
 
 Redeploy after changing environment variables. The API must allow requests from the frontend's origin.
 
