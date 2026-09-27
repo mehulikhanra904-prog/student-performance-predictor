@@ -4,13 +4,12 @@
 
 ### Turn everyday learning habits into a clearer picture of academic progress.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Try%20the%20App-5B4BDB?style=for-the-badge&logo=vercel&logoColor=white)](https://student-performance-predictor-virid.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20App-7442D8?style=for-the-badge&logo=vercel&logoColor=white)](https://student-performance-predictor-virid.vercel.app/)
 [![React](https://img.shields.io/badge/React-19-149ECA?style=flat-square&logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Python](https://img.shields.io/badge/Python-ML%20Backend-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 
-**Live Vercel deployment:** [Open the app](https://student-performance-predictor-virid.vercel.app/) · [Explore the code](https://github.com/mehulikhanra904-prog/student-performance-predictor)
+**[Try the live app](https://student-performance-predictor-virid.vercel.app/)** · [View source](https://github.com/mehulikhanra904-prog/student-performance-predictor)
 
 </div>
 
@@ -18,56 +17,50 @@
 
 ## ✨ About
 
-Student Performance Predictor is a full-stack machine-learning application that estimates a student's final score from study habits and academic indicators. Enter a few details to receive a predicted score, a performance category, and practical suggestions based on the information provided.
+Student Performance Predictor is a full-stack machine-learning demo that estimates academic performance from study habits and student indicators. Enter six values to receive an estimated score, a performance category, and practical habit-based suggestions.
 
-The project brings together a responsive React interface, a FastAPI prediction service, and a Linear Regression model trained with scikit-learn.
+> **For learning and exploration:** Predictions are estimates based on the project's training data. They are not a definitive measure of a student's ability or future results.
 
-> **Learning project:** Predictions are estimates from a small sample dataset. They are intended for exploration and demonstration, not as a definitive measure of a student's ability or future results.
+## 🌟 Features
 
-## 🚀 Features
+- Estimated score and performance category from a trained regression model.
+- Six student indicators covering study, attendance, past scores, assignments, sleep, and participation.
+- Personalized suggestions based on the entered values.
+- Model evaluation panel with MAE, RMSE, R², and dataset sample counts.
+- Recent predictions saved locally in the browser, with a clear-history option.
+- Responsive React interface with a soft lavender theme, subtle animated stars, and accessible reduced-motion support.
+- FastAPI REST API with validated inputs.
 
-- **Score prediction** from six academic and lifestyle inputs.
-- **Performance category** alongside the predicted score.
-- **Personalized suggestions** based on the values entered.
-- **Model information** including the model name, training and testing sample counts, MAE, RMSE, and R² score.
-- **Recent prediction history** saved in the browser with local storage.
-- **Responsive interface** for desktop and mobile screens.
-- **Separate frontend and backend** that communicate through a JSON REST API.
+## 🧾 Prediction inputs
 
-## 🧾 Inputs
-
-| Input | Description | Accepted range |
-| --- | --- | --- |
-| Study hours | Average hours spent studying per day | 0–24 |
-| Attendance | Attendance percentage | 0–100 |
-| Previous score | Previous academic score | 0–100 |
+| Field | Meaning | Range |
+|---|---|---:|
+| Study hours | Average study time per day | 0–24 |
+| Attendance | Percentage of classes attended | 0–100 |
+| Previous score | Most recent academic score | 0–100 |
 | Assignments completed | Completed assignments | 0–100 |
-| Sleep hours | Average hours of sleep per day | 0–24 |
-| Participation | Class participation indicator | 0–100 |
-
-The API returns a predicted score between 0 and 100 and one of these categories: **Excellent**, **Good**, **Average**, **Needs Improvement**, or **At Risk**.
+| Sleep hours | Average sleep per day | 0–24 |
+| Participation | Class participation rating | 1–10 |
 
 ## 🧰 Technology
 
 - **Frontend:** React, Vite, JavaScript, CSS
 - **Backend:** Python, FastAPI, Pydantic
-- **Machine learning:** scikit-learn Linear Regression
-- **Model persistence:** Joblib
-- **Hosting:** Vercel for the frontend; configure a reachable FastAPI service for the backend
+- **Machine learning:** scikit-learn regression model
+- **Model files:** Joblib
+- **Hosting:** Vercel (frontend), Render-compatible FastAPI service (backend)
 
-## 🏗️ How it works
+## 🏗️ Architecture
 
 ```mermaid
 flowchart LR
-    Student[Student enters details] --> UI[React and Vite frontend]
-    UI -->|POST /predict| API[FastAPI service]
-    API --> Model[Linear Regression model]
-    Model --> API
-    API -->|Score and category| UI
-    UI --> History[Browser local storage]
+  U[Student enters six indicators] --> W[React and Vite frontend]
+  W -->|POST /predict| A[FastAPI backend]
+  A --> M[Saved regression model]
+  M --> A
+  A -->|Score and category| W
+  W --> H[Browser prediction history]
 ```
-
-The frontend sends the six input values to `POST /predict`. The backend validates the request, runs the trained model, clamps the result to the 0–100 range, and returns the score and category. The frontend also requests `GET /model-info` to display model evaluation information.
 
 ## 📁 Project structure
 
@@ -78,104 +71,92 @@ student-performance-predictor/
 │   ├── main.py
 │   ├── model.pkl
 │   ├── model_info.pkl
-│   ├── train_model.py
-│   ├── test.py
-│   └── test_api.py
+│   ├── requirements.txt
+│   └── train_model.py
 ├── frontend/
-│   ├── public/
 │   ├── src/
 │   ├── package.json
 │   └── vite.config.js
-├── package-lock.json
+├── render.yaml
 └── README.md
 ```
 
-## 💻 Run locally
+## 🚀 Run locally
 
-### Prerequisites
+### Requirements
 
-- Python 3.10 or newer
+- Python 3.10+
 - Node.js and npm
 - Git
 
-### 1. Get the project
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/mehulikhanra904-prog/student-performance-predictor.git
 cd student-performance-predictor
 ```
 
-### 2. Start the backend
-
-In a terminal:
+### 2. Start the API
 
 ```bash
 cd backend
 python -m venv .venv
 ```
 
-Activate the virtual environment, then install the backend packages:
+Activate the environment, install dependencies, and start FastAPI:
 
 **Windows PowerShell**
-
 ```powershell
 .\.venv\Scripts\Activate.ps1
-python -m pip install fastapi uvicorn pandas scikit-learn joblib
+python -m pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 ```
 
 **macOS / Linux**
-
 ```bash
 source .venv/bin/activate
-python -m pip install fastapi uvicorn pandas scikit-learn joblib
+python -m pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 ```
 
-The API runs at `http://127.0.0.1:8000`. Interactive API documentation is available at `http://127.0.0.1:8000/docs`.
+API root: `http://127.0.0.1:8000` · API docs: `http://127.0.0.1:8000/docs`
 
 ### 3. Start the frontend
 
-Open a second terminal in the project folder:
+In a second terminal:
 
 ```bash
 cd frontend
 npm install
 ```
 
-Create `frontend/.env.local` with the local API address:
+Create `frontend/.env.local`:
 
 ```env
 VITE_API_URL=http://127.0.0.1:8000
 ```
 
-Then run the development server:
+Then run:
 
 ```bash
 npm run dev
 ```
 
-Open the local URL printed by Vite, usually `http://localhost:5173`.
+Open the Vite URL shown in the terminal, usually `http://localhost:5173`.
 
-## 🔌 API reference
+## 🔌 API
 
 ### `GET /`
 
-Checks that the API is running.
-
-```json
-{
-  "message": "Student Performance Predictor API is running"
-}
-```
+Returns an API status message.
 
 ### `GET /model-info`
 
-Returns the model name and evaluation values used by the frontend.
+Returns the trained model name, evaluation scores, and training/testing sample counts.
 
 ### `POST /predict`
 
-Example request:
+Accepts JSON with all six numeric input fields listed above. Example:
 
 ```json
 {
@@ -188,68 +169,48 @@ Example request:
 }
 ```
 
-Example response:
+A successful response contains `predicted_score` and `performance`.
 
-```json
-{
-  "predicted_score": 78.42,
-  "performance": "Good"
-}
-```
-
-Invalid or out-of-range values are rejected by request validation.
-
-## ☁️ Deployment configuration
+## ☁️ Deployment
 
 ### Frontend on Vercel
 
-Configure the Vercel project to use the `frontend` directory as its **Root Directory**. The usual Vite settings are:
+The live frontend is [student-performance-predictor-virid.vercel.app](https://student-performance-predictor-virid.vercel.app/). Configure the Vercel project with:
 
-- **Install command:** `npm install`
+- **Root directory:** `frontend`
+- **Framework:** Vite
 - **Build command:** `npm run build`
 - **Output directory:** `dist`
+- **Environment variable:** `VITE_API_URL` set to the public base URL of the deployed FastAPI service
 
-Set the `VITE_API_URL` environment variable to the base URL of your deployed FastAPI backend, for example:
+Redeploy after changing environment variables. The API must allow requests from the frontend's origin.
 
-```text
-VITE_API_URL=https://your-api.example.com
-```
+### Backend on Render
 
-Add the variable for the environments you deploy (such as Production and Preview), then trigger a new deployment. The API service must allow requests from the frontend domain.
-
-### Backend
-
-Deploy the `backend` directory as a Python web service and start it with:
+The repository includes `render.yaml` for a Python web service. Configure the backend root directory as `backend`, install `requirements.txt`, and start with:
 
 ```bash
 uvicorn main:app --host 0.0.0.0 --port $PORT
 ```
 
-Install `fastapi`, `uvicorn`, `pandas`, `scikit-learn`, and `joblib` in the service environment. The saved `model.pkl` and `model_info.pkl` files must be present relative to the backend working directory.
+## 🧠 Retrain the model
 
-## 🧠 Train the model
-
-To retrain the model using `backend/dataset.csv`, activate your Python environment and run:
+From the backend directory with dependencies installed:
 
 ```bash
-cd backend
 python train_model.py
 ```
 
-This writes updated `model.pkl` and `model_info.pkl` files. The training script expects the CSV to contain `study_hours`, `attendance`, `previous_score`, `assignments_completed`, `sleep_hours`, `participation`, and `final_score` columns.
+Commit and redeploy the updated model artifacts when you want to publish the retrained model.
 
 ## 🤝 Contributing
 
-Contributions, bug reports, and suggestions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
+Issues and improvements are welcome. Open a GitHub issue or submit a pull request with a clear summary of the change.
 
 ## 📄 License
 
-No license is currently specified. Contact the repository owner before redistributing or reusing this project.
+No license is currently specified. Contact the repository owner before reuse or redistribution.
 
 ---
 
-<div align="center">
-
-Made with ❤️ for learning and academic insight.
-
-</div>
+<div align="center">Made with ❤️ for learning and academic insight.</div>
