@@ -3,6 +3,8 @@ from pathlib import Path
 import joblib
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -21,6 +23,38 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    messages = []
+
+    for error in exc.errors():
+        location = error.get("loc", ())
+        field = location[-1] if location else "request"
+        error_type = error.get("type", "")
+        context = error.get("ctx", {})
+
+        field_name = str(field).replace("_", " ").capitalize()
+
+        if error_type == "missing":
+            message = f"{field_name} is required."
+        elif error_type == "greater_than_equal":
+            minimum = context.get("ge")
+            message = f"{field_name} must be at least {minimum}."
+        elif error_type == "less_than_equal":
+            maximum = context.get("le")
+            message = f"{field_name} must be at most {maximum}."
+        elif error_type in {"float_parsing", "int_parsing"}:
+            message = f"{field_name} must be a valid number."
+        else:
+            message = f"{field_name} has an invalid value."
+
+        messages.append(message)
+
+    return JSONResponse(
+        status_code=422,
+        content={"detail": " ".join(messages)},
+    )
 
 try:
     model = joblib.load(MODEL_PATH)
